@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        dir(path: 'openio-sds/$SDS_RELEASE/centos/7') {
+        dir(path: 'openio-sds/${SDS_RELEASE}/centos/7') {
           sh './build.sh'
         }
 
