@@ -4,6 +4,8 @@ pipeline {
     stage('build') {
       steps {
         dir(path: 'openio-sds/${SDS_RELEASE}/centos/7') {
+          sh 'pwd'
+          sh 'echo ${SDS_RELEASE}'
           sh './build.sh'
         }
 
