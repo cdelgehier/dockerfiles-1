@@ -4,9 +4,20 @@ pipeline {
     stage('build') {
       steps {
         dir(path: "openio-sds/${SDS_RELEASE}/centos/7") {
-          sh "pwd"
+          sh 'pwd'
           sh "echo ${SDS_RELEASE}"
-          sh "./build.sh"
+          sh './build.sh'
+        }
+
+      }
+    }
+    stage('docker push') {
+      steps {
+        script {
+          sh "docker push openio/sds:${SDS_RELEASE}"
+          if (params.LATEST) {
+            sh "docker push openio/sds:latest"
+          }
         }
 
       }
