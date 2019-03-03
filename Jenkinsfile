@@ -13,10 +13,15 @@ pipeline {
     }
     stage('docker push') {
       steps {
+        withCredentials([usernamePassword(credentialsId: 'ID_HUB_DOCKER', usernameVariable: 'docker_user', passwordVariable: 'docker_pass')]) {
+              sh "docker login -u ${docker_user} -p ${docker_pass}"
+            }
         script {
           sh "docker push openio/sds:${SDS_RELEASE}"
+
           if (params.LATEST) {
             sh "docker push openio/sds:latest"
+
           }
         }
 
