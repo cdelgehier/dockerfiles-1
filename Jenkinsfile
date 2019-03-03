@@ -14,7 +14,7 @@ pipeline {
     stage('docker push') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'ID_HUB_DOCKER', usernameVariable: 'docker_user', passwordVariable: 'docker_pass')]) {
-              sh "docker login -u ${docker_user} -p ${docker_pass}"
+              sh "echo ${docker_pass} | docker login --password-stdin -u ${docker_user}"
             }
         script {
           sh "docker push openio/sds:${SDS_RELEASE}"
