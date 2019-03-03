@@ -20,6 +20,7 @@ pipeline {
           sh "docker push openio/sds:${SDS_RELEASE}"
 
           if (params.LATEST) {
+            sh "docker tag openio/sds:${SDS_RELEASE} openio/sds:latest"
             sh "docker push openio/sds:latest"
 
           }
